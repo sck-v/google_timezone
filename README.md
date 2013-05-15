@@ -1,6 +1,6 @@
 # GoogleTimezone
 
-TODO: Write a gem description
+Small gem to get timezone info by known coordinates using google timezone api.
 
 ## Installation
 
