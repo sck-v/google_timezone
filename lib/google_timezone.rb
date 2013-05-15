@@ -1,5 +1,15 @@
-require "google_timezone/version"
+require 'google_timezone/version'
+require 'google_timezone/base'
+require 'google_timezone/result'
 
 module GoogleTimezone
-  # Your code goes here...
+  def fetch(*args)
+    Base.new(args).fetch
+  end
+
+  def fetch!(*args)
+    Base.new(args).fetch!
+  end
+
+  module_function :fetch, :fetch!
 end

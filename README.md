@@ -18,7 +18,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+It uses latitude and longitude to retrieve timezone info.
+
+    GoogleTimezone.fetch(50.1196004, 8.679918299999999)
+
+It will get `GoogleTimezone::Result` object which maps major google api responce items named in snake case.
+More information [here](https://developers.google.com/maps/documentation/timezone/)
+Also there is `GoogleTimezone::Result#success?` method. It returns true if responce was successful.
+
+The bang version `fetch!` raises an error if google responce is not ok.
+
 
 ## Contributing
 
