@@ -3,13 +3,13 @@ require 'google_timezone/base'
 require 'google_timezone/result'
 
 module GoogleTimezone
-  def fetch(*args)
-    Base.new(args).fetch
-  end
+  class << self
+    def fetch(*args)
+      Base.new(args).fetch
+    end
 
-  def fetch!(*args)
-    Base.new(args).fetch!
+    def fetch!(*args)
+      Base.new(args).fetch!
+    end
   end
-
-  module_function :fetch, :fetch!
 end
