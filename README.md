@@ -18,9 +18,15 @@ Or install it yourself as:
 
 ## Usage
 
+You can pass latitude and longitude to gem in several ways: with array or separated values.
+
+    GoogleTimezone.fetch([latitude, longitude]) 
+    GoogleTimezone.fetch(latitude, longitude) 
+
 It uses latitude and longitude to retrieve timezone info.
 
-    GoogleTimezone.fetch(50.1196004, 8.679918299999999)
+    result = GoogleTimezone.fetch(50.1196004, 8.679918299999999)
+    result.time_zone_name => 'Europe/Berlin'
 
 It will get `GoogleTimezone::Result` object which maps major google api responce items named in snake case.
 More information [here](https://developers.google.com/maps/documentation/timezone/)
