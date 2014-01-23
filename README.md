@@ -22,6 +22,10 @@ You can pass latitude and longitude to gem in several ways: with array or separa
 
     GoogleTimezone.fetch([latitude, longitude]) 
     GoogleTimezone.fetch(latitude, longitude) 
+    
+Any other options which are described in google's documentation you can pass via options hash
+
+    GoogleTimezone.fetch(latitude, longitude, language: 'en', signature: 'key')
 
 It uses latitude and longitude to retrieve timezone info.
 
