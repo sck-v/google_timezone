@@ -6,7 +6,7 @@ module GoogleTimezone
   class Error < StandardError; end
 
   class Base
-    @allowed_params = [:language, :sensor, :timestamp, :client, :signature]
+    @allowed_params = [:language, :sensor, :timestamp, :client, :signature, :key]
 
     def initialize(*args)
       @lat, @lon = if args.first.is_a? Array
