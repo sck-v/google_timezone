@@ -36,7 +36,7 @@ It will get `GoogleTimezone::Result` object which maps major google api responce
 More information [here](https://developers.google.com/maps/documentation/timezone/)
 Also there is `GoogleTimezone::Result#success?` method. It returns true if responce was successful.
 
-The bang version `fetch!` raises an error if google responce is not ok.
+The bang version `fetch!` raises an `GoogleTimezone::Error` exception with error message if response from Google wasn't success.
 
 
 ## Contributing
