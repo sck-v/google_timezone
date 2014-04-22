@@ -2,6 +2,9 @@ require 'json'
 require 'open-uri'
 
 module GoogleTimezone
+
+  class Error < StandardError; end
+
   class Base
     @allowed_params = [:language, :sensor, :timestamp, :client, :signature]
 
@@ -24,7 +27,7 @@ module GoogleTimezone
 
     def fetch!
       result = fetch
-      raise_error(result.result) unless result.success?
+      raise(GoogleTimezone::Error.new(result.result)) unless result.success?
       result
     end
 
