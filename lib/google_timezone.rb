@@ -11,5 +11,9 @@ module GoogleTimezone
     def fetch!(*args)
       Base.new(*args).fetch!
     end
+
+    def set_default_stub(default_stub)
+      Base.default_stub = default_stub
+    end
   end
 end

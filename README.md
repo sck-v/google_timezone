@@ -38,6 +38,18 @@ Also there is `GoogleTimezone::Result#success?` method. It returns true if respo
 
 The bang version `fetch!` raises an `GoogleTimezone::Error` exception with error message if response from Google wasn't success.
 
+## Usage in tests/specs
+
+During tests, you probably don't want to make remote calls. To achieve this, you should set a default stub in your test/spec helper file, e.g.:
+
+    # spec/support/google_timezone.rb
+    GoogleTimezone.set_default_stub(
+      'dstOffset' => 3600,
+      'rawOffset' => -10800,
+      'status' => 'OK',
+      'timeZoneId' => 'America/Sao_Paulo',
+      'timeZoneName' => 'Brasilia Summer Time'
+    )
 
 ## Contributing
 

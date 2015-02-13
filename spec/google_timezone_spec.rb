@@ -1,15 +1,19 @@
 require 'google_timezone'
 
 describe GoogleTimezone do
-  let(:raw_result) { {} }
+  def self.stub_remote_calls!
+    let(:raw_result) { {} }
 
-  before do
-    allow_any_instance_of(GoogleTimezone::Base).to(
-      receive(:get_result).and_return(raw_result)
-    )
+    before do
+      allow_any_instance_of(GoogleTimezone::Base).to(
+        receive(:get_result).and_return(raw_result)
+      )
+    end
   end
 
   describe '.fetch' do
+    stub_remote_calls!
+
     context 'without any optional parameters' do
       it 'should accept separate lat/long paramenters' do
         g = GoogleTimezone.fetch(0, 0)
@@ -44,6 +48,8 @@ describe GoogleTimezone do
   end
 
   describe '.fetch!' do
+    stub_remote_calls!
+
     describe 'if result is not successful' do
       it 'should raise an error' do
         expect { GoogleTimezone.fetch!(0, 0) }.to raise_error(GoogleTimezone::Error)
@@ -57,6 +63,22 @@ describe GoogleTimezone do
         g = GoogleTimezone.fetch!(0, 0)
         expect(g).to be_an_instance_of(GoogleTimezone::Result)
       end
+    end
+  end
+
+  describe '.set_default_stub' do
+    after { GoogleTimezone.set_default_stub(nil) }
+
+    it 'does not make a remote call' do
+      GoogleTimezone.set_default_stub({})
+      expect_any_instance_of(GoogleTimezone::Base).not_to receive(:open)
+      GoogleTimezone.fetch(0, 0)
+    end
+
+    it 'returns the configured stub' do
+      GoogleTimezone.set_default_stub('timeZoneId' => 'Europe/Berlin')
+      g = GoogleTimezone.fetch(0, 0)
+      expect(g.time_zone_id).to eq('Europe/Berlin')
     end
   end
 end
