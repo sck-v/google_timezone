@@ -8,6 +8,10 @@ module GoogleTimezone
   class Base
     ALLOWED_PARAMS = [:language, :sensor, :timestamp, :client, :signature, :key]
 
+    class << self
+      attr_accessor :default_stub
+    end
+
     def initialize(*args)
       @lat, @lon = if args.first.is_a? Array
                      args.first
@@ -47,7 +51,7 @@ module GoogleTimezone
     end
 
     def get_result(params)
-      open(url(params)) { |r| JSON.parse(r.read) }
+      self.class.default_stub || open(url(params)) { |r| JSON.parse(r.read) }
     end
   end
 end
