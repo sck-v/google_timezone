@@ -31,9 +31,9 @@ module GoogleTimezone
     end
 
     def fetch!
-      result = fetch
-      raise(GoogleTimezone::Error.new(result.result)) unless result.success?
-      result
+      fetch.tap do |result|
+        raise(GoogleTimezone::Error.new(result.result)) unless result.success?
+      end
     end
 
     private
