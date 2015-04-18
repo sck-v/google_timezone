@@ -6,7 +6,7 @@ module GoogleTimezone
   class Error < StandardError; end
 
   class Base
-    ALLOWED_PARAMS = [:language, :sensor, :timestamp, :client, :signature, :key]
+    ALLOWED_PARAMS = [:language, :timestamp, :client, :signature, :key]
 
     class << self
       attr_accessor :default_stub
@@ -25,7 +25,7 @@ module GoogleTimezone
 
     def fetch
       location = [@lat, @lon].join(',')
-      params = { location: location, sensor: false, timestamp: Time.now.to_i }.merge(@options)
+      params = { location: location, timestamp: Time.now.to_i }.merge(@options)
       result = get_result(params)
       Result.new(result)
     end
