@@ -39,7 +39,7 @@ describe GoogleTimezone do
       end
 
       it 'should reject unallowed parameters' do
-        a_hash_excluding = ->(*keys) { satisfy {|actual| (keys & actual.keys).empty? } }
+        a_hash_excluding = -> (*keys) { satisfy { |actual| (keys & actual.keys).empty? } }
         expect_any_instance_of(GoogleTimezone::Base).to receive(:get_result).with(a_hash_excluding[:unallowed_param])
         g = GoogleTimezone.fetch(0, 0, invalid_params)
         expect(g).to be_an_instance_of(GoogleTimezone::Result)
@@ -57,7 +57,7 @@ describe GoogleTimezone do
     end
 
     describe 'if result is successul' do
-      let(:raw_result) { {'status' => 'OK'} }
+      let(:raw_result) { { 'status' => 'OK' } }
 
       it 'should return a result' do
         g = GoogleTimezone.fetch!(0, 0)
