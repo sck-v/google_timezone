@@ -51,7 +51,7 @@ module GoogleTimezone
     end
 
     def get_result(params)
-      self.class.default_stub || open(url(params)) { |r| JSON.parse(r.read) }
+      self.class.default_stub || URI.open(url(params)) { |r| JSON.parse(r.read) }
     end
   end
 end
